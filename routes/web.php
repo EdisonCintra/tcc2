@@ -8,24 +8,21 @@ Route::get('/', function () {
     return view('welcome');
 })->middleware(['auth', 'verified'])->name('home');
 
-
-//Route::get('/', [CustomerController::class, 'index'])->name('customer.index');
-
-
 Route::get('/customers', [CustomerController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('customers');
+
+Route::get('/editCustomer/{customer}', [CustomerController::class, 'show'])
+    ->middleware(['auth', 'verified'])
+    ->name('editCustomer');
 
 Route::get('/newCustomer', [CustomerController::class, 'create'])
     ->middleware(['auth', 'verified'])
     ->name('newCustomer');
 
-
 Route::post('/store-customer', [CustomerController::class, 'store'])
     ->middleware(['auth', 'verified'])
     ->name('storeCustomer');
-
-
 
 
 
@@ -61,10 +58,6 @@ Route::get('/graphic', function () {
 Route::get('/editProduct', function () {
     return view('editProduct');
 })->middleware(['auth', 'verified'])->name('editProduct');
-
-Route::get('/editCustomer', function () {
-    return view('editCustomer');
-})->middleware(['auth', 'verified'])->name('editCustomer');
 
 Route::get('/editOrder', function () {
     return view('editOrder');

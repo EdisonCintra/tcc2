@@ -9,8 +9,17 @@ use Illuminate\Http\Request;
 class CustomerController extends Controller
 {
     public function index(){
+
+        $customers = Cliente::orderByDesc('id')->get();
+
         //carregar view
-        return view('customers');
+        return view('customers', ['customers' => $customers]);
+
+    }
+
+    public function show(Cliente $customer){
+//        dd($customer);
+      return view('editCustomer', ['customer' => $customer ]);
     }
 
     public function create(){
